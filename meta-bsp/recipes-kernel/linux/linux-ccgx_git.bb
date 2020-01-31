@@ -25,12 +25,10 @@ uboot_prep_kimage() {
 
 RDEPENDS_kernel-base = ""
 
-S = "${WORKDIR}/linux-${PV}"
+S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
-
-SRC_URI = "https://github.com/victronenergy/linux/archive/v${PV}.tar.gz"
-SRC_URI[md5sum] = "111f89d9428b57bd4992789e1c505fd6"
-SRC_URI[sha256sum] = "92bf84757976809108bffcdb3084de3d4c1a5ba62d4c94a3f559373b1a93ec38"
 
 DEPENDS += "openssl-native"
 HOST_EXTRACFLAGS += "-I${STAGING_INCDIR_NATIVE}"
+
+SRC_URI = "git://github.com/jhofstee/linux;branch=mans/venus-5.4;tag=5796405f48c57b9fcad9f7b0dc0847b9d195e2ef"
