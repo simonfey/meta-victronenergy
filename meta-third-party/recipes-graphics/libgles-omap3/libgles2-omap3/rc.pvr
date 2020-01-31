@@ -1,0 +1,28 @@
+#!/bin/sh
+
+start() {
+	modprobe omaplfb
+	pvrsrvctl --start --no-module
+}
+
+stop() {
+	rmmod omaplfb
+	rmmod pvrsrvkm
+}
+
+case "$1" in
+"start")
+	start
+	;;
+stop)
+	stop
+	;;
+reload|restart)
+	start
+	stop
+	;;
+*)
+	echo "$0: unknown argument $1" >&2
+	;;
+esac
+
