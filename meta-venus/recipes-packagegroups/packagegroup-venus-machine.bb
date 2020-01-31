@@ -42,6 +42,7 @@ RDEPENDS_${PN}_append_ccgx += "\
     swupdate \
     swupdate-scripts \
     technexion-serial \
+    ${QT5_RDEPENDS} \
 "
 
 RDEPENDS_${PN}_append_beaglebone += "\
