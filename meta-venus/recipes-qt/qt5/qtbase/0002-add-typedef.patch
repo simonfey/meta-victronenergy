@@ -1,0 +1,26 @@
+From 647918ca4c0f2e4419aabb574285339cd3c4f049 Mon Sep 17 00:00:00 2001
+From: Jeroen Hofstee <jhofstee@victronenergy.com>
+Date: Thu, 2 Jan 2020 19:20:23 +0000
+Subject: [PATCH 2/2] add typedef
+
+see https://bugreports.qt.io/browse/QTBUG-72567
+---
+ .../eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmwindow.cpp    | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmwindow.cpp b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmwindow.cpp
+index 110a592dec..ae5b286db9 100644
+--- a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmwindow.cpp
++++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmwindow.cpp
+@@ -43,6 +43,8 @@
+ 
+ #include <QtEglSupport/private/qeglconvenience_p.h>
+ 
++typedef EGLSurface (EGLAPIENTRYP PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC) (EGLDisplay dpy, EGLConfig config, void *native_window, const EGLint *attrib_list);
++
+ QT_BEGIN_NAMESPACE
+ 
+ void QEglFSKmsGbmWindow::resetSurface()
+-- 
+2.17.1
+

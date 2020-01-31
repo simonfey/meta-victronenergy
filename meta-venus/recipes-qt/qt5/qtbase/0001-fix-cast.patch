@@ -1,0 +1,31 @@
+From 3bcc102235e32f97e3420f31042d879580bd7d7a Mon Sep 17 00:00:00 2001
+From: Jeroen Hofstee <jhofstee@victronenergy.com>
+Date: Thu, 2 Jan 2020 19:15:57 +0000
+Subject: [PATCH 1/2] fix cast
+
+In member function 'virtual void* QEglFSKmsGbmIntegration::createDisplay(EGLNativeDisplayType)':
+86:82: error: invalid conversion from 'EGLNativeDisplayType {aka int}' to 'void*' [-fpermissive]
+|          display = getPlatformDisplay(EGL_PLATFORM_GBM_KHR, nativeDisplay, nullptr)
+
+see https://bugreports.qt.io/browse/QTBUG-72567
+---
+ .../deviceintegration/eglfs_kms/qeglfskmsgbmintegration.cpp    | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmintegration.cpp b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmintegration.cpp
+index 402338197d..b0f6b36dc3 100644
+--- a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmintegration.cpp
++++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmintegration.cpp
+@@ -83,7 +83,8 @@ EGLDisplay QEglFSKmsGbmIntegration::createDisplay(EGLNativeDisplayType nativeDis
+     }
+ 
+     if (getPlatformDisplay) {
+-        display = getPlatformDisplay(EGL_PLATFORM_GBM_KHR, nativeDisplay, nullptr);
++        qintptr nativeDisplayPtr = reinterpret_cast<qintptr>(nativeDisplay);
++        display = getPlatformDisplay(EGL_PLATFORM_GBM_KHR, reinterpret_cast<void *>(&nativeDisplayPtr), nullptr);
+     } else {
+         qCDebug(qLcEglfsKmsDebug, "No eglGetPlatformDisplay for GBM, falling back to eglGetDisplay");
+         display = eglGetDisplay(nativeDisplay);
+-- 
+2.17.1
+
