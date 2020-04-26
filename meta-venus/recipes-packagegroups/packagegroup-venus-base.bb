@@ -66,6 +66,7 @@ RDEPENDS_${PN} += "\
     logo \
     nano \
     ncurses-tools \
+    node-red \
     openssh \
     openssh-sftp-server \
     opkg \
