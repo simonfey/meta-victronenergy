@@ -21,6 +21,7 @@ SRC_URI_append_ccgx += "file://get-unique-id.c"
 SRC_URI_append_einstein += "\
     file://backlight_device.in \
     file://blank_display_device.in \
+    file://can_names.in \
 "
 SRC_URI_append_sunxi += "file://canbus_ports.in"
 

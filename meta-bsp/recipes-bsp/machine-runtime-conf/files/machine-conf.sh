@@ -28,6 +28,7 @@ CONFIGS="
     backlight_device
     blank_display_device
     canbus_ports
+    can_names
 "
 
 mkdir -p /run/venus
