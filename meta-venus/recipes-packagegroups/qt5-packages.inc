@@ -8,5 +8,6 @@ QT5_PACKAGES = " \
     qtquickcontrols2 \
     qtserialport \
     qtsvg-plugins \
+    qtwebengine \
 "
 
